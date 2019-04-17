@@ -16,25 +16,20 @@ var evenOccurrence = function(arr) {
   // C: none
   // E: no item occurs an even number of times, there's a tie
 
-  // In an object, create a log of number of occurences of each number
-  // Run through object: the first item that has an even number occurrence, return it
+  var newArr = arr.filter(elem => {
+    var counter = 0;
+    arr.forEach(element => {
+      if (element === elem) {
+        counter++;
+      }
+    })
 
-  // Create empty log object
-  var logObj = {};
-  var output = null;
-  // Go through input array and set keys to each array element
-  arr.forEach(element => {
-    // Update key's value for each occurrence
-    logObj[element] = logObj[element] ? logObj[element] + 1: 1;
+    if (counter % 2 === 0) {
+      return elem;
+    }
   });
 
-  // Go through log in order, if a number occurs an even number of times, return it
-  for (let key in logObj) {
-    if (logObj[key] % 2 === 0) {
-      output = key;
-      break;
-    }
-  }
-
-return output;
+  var output = newArr[0] ? newArr[0] : null;
+  return output;
 };
+
