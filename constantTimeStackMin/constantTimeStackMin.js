@@ -13,28 +13,38 @@
  *  example.push(2)
  *  example.min() === 2
  */
-
+// [1,2,3,4]
 /**
   * Stack Class
   */
   var Stack = function() {
 
+    var stack = [];
+    var supportingStack = [];
+
   // add an item to the top of the stack
     this.push = function(value) {
+      stack.push(value);
+      if (!supportingStack[0] || (stack[stack.length - 1] < supportingStack[supportingStack.length - 1])) {
+        supportingStack.push(value);
+      }
     };
 
   // remove an item from the top of the stack
     this.pop = function() {
+      if (stack[stack.length - 1] === supportingStack[supportingStack.length - 1]) {
+        supportingStack.pop();
+      }
+      return stack.pop();
     };
 
   // return the number of items in the stack
     this.size = function() {
+      return stack.length;
     };
   
   // return the minimum value in the stack
     this.min = function() {
-
+      return supportingStack[supportingStack.length - 1];
     };
-
   };
-
