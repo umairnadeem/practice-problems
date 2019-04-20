@@ -35,27 +35,48 @@ var Node = function(value) {
   return { value: value, next: null };
 };
 
-// Attempt #2: Constant time and space, but algorithm fails for larger data-sets
-var hasCycle = function(linkedList) {
-  // go through all nodes, keep track in a counter
-  // if counter exceeds 1,000, return true else return false
-  var count = 0;
-  var bool = false;
 
-  var nodeTraverser = function(node) {
-    count++;
-    if (count >= 1000) {
-      bool = true;
-      return;
-    } else if (node.next) {
-      nodeTraverser(node.next)
+// Solution #3: Detect if two different-rate pointers ever meet, meets all requirements
+var hasCycle = function(linkedList) {
+  // two pointers: 1 is fast, other is slow
+  // if two pointers meet at the same node, return true 
+  // if the two pointers don't meet, return false
+
+  var fastPointer = linkedList;
+  var slowPointer = linkedList;
+
+  while(slowPointer && fastPointer && fastPointer.next) {
+    slowPointer = slowPointer.next;
+    fastPointer = fastPointer.next.next;
+    if (slowPointer === fastPointer) {
+      return true;
     }
   }
 
-  nodeTraverser(linkedList);
-
-  return bool;
+  return false;
 }
+
+// Attempt #2: Constant time and space, but algorithm fails for larger data-sets
+// var hasCycle = function(linkedList) {
+//   // go through all nodes, keep track in a counter
+//   // if counter exceeds 1,000, return true else return false
+//   var count = 0;
+//   var bool = false;
+
+//   var nodeTraverser = function(node) {
+//     count++;
+//     if (count >= 1000) {
+//       bool = true;
+//       return;
+//     } else if (node.next) {
+//       nodeTraverser(node.next)
+//     }
+//   }
+
+//   nodeTraverser(linkedList);
+
+//   return bool;
+// }
 
 // Attempt #1: Algorithm works for all data set sizes, but 0(n^2) time and 0(n) space complexity
 // var hasCycle = function(linkedList) {
