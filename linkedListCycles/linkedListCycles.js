@@ -36,5 +36,24 @@ var Node = function(value) {
 };
 
 var hasCycle = function(linkedList) {
-  // TODO: implement me!
+  var arr = [];
+  var bool = false;
+
+  // Go through the nodes
+    // Add the node object to an array to keep track
+    // If a node's next value is already in our array, return true
+    // else return false
+
+  var nodeTraverser = function(node) {
+    if (arr.indexOf(node) !== -1) {
+      bool = true;
+      return;
+    } else if (node.next) {
+      arr.push(node);
+      nodeTraverser(node.next);
+    }
+  }
+
+  nodeTraverser(linkedList);
+  return bool;
 };

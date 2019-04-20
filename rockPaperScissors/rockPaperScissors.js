@@ -26,6 +26,7 @@ f(3) = [rrr, rrp, ]
 var rockPaperScissors = function (n) {
   // TODO: your solution here
   var arr = ['R', 'P', 'S'];
+  var multiArr = [];
   var output = [];
   var tempString = '';
   //I: number of rouds
@@ -33,18 +34,36 @@ var rockPaperScissors = function (n) {
   //C: none
   //E: input is 0
 
-    arr.forEach(x => {
-        arr.forEach(y => {
-            arr.forEach(z => {
-                tempString = '';
-                tempString += x;
-                tempString += y;
-                tempString += z;
-                output.push(tempString);
-            });
-        });
-    });
+  for (var i = 0; i < n; i++) {
+      multiArr.push(arr);
+  }
 
-    return output;
+  multiArr.forEach((row, x) => {
+    row.forEach((col, y) => {
+        tempString = '';
+        multiArr.forEach((elem, z) => {
+            tempString += multiArr[x][y];
+        })
+        output.push(tempString);
+    })
+  })
+
+  return output;
+
+    // arr.forEach(x => {
+    //     arr.forEach(y => {
+    //         arr.forEach(z => {
+    //             tempString = '';
+    //             tempString += x;
+    //             tempString += y;
+    //             tempString += z;
+    //             output.push(tempString);
+    //         });
+    //     });
+    // });
+
+    // return output;
 };
+
+console.log(rockPaperScissors(5));
 
