@@ -35,25 +35,48 @@ var Node = function(value) {
   return { value: value, next: null };
 };
 
+// Attempt #2: Constant time and space, but algorithm fails for larger data-sets
 var hasCycle = function(linkedList) {
-  var arr = [];
+  // go through all nodes, keep track in a counter
+  // if counter exceeds 1,000, return true else return false
+  var count = 0;
   var bool = false;
 
-  // Go through the nodes
-    // Add the node object to an array to keep track
-    // If a node's next value is already in our array, return true
-    // else return false
-
   var nodeTraverser = function(node) {
-    if (arr.indexOf(node) !== -1) {
+    count++;
+    if (count >= 1000) {
       bool = true;
       return;
     } else if (node.next) {
-      arr.push(node);
-      nodeTraverser(node.next);
+      nodeTraverser(node.next)
     }
   }
 
   nodeTraverser(linkedList);
+
   return bool;
-};
+}
+
+// Attempt #1: Algorithm works for all data set sizes, but 0(n^2) time and 0(n) space complexity
+// var hasCycle = function(linkedList) {
+//   var arr = [];
+//   var bool = false;
+
+//   // Go through the nodes
+//     // Add the node object to an array to keep track
+//     // If a node's next value is already in our array, return true
+//     // else return false
+
+//   var nodeTraverser = function(node) {
+//     if (arr.indexOf(node) !== -1) {
+//       bool = true;
+//       return;
+//     } else if (node.next) {
+//       arr.push(node);
+//       nodeTraverser(node.next);
+//     }
+//   }
+
+//   nodeTraverser(linkedList);
+//   return bool;
+// };
