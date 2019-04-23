@@ -46,18 +46,17 @@ var bubbleSort = function(array) {
 
   var swapped = 0;
   
-  for(var x = 0; x < array.length - 1; x++) {
-    for (var i = 0; i < array.length - 1; i++) {
+  for(var x = 1; x < array.length; x++) {
+    for (var i = 0; i < array.length - x; i++) {
       if (array[i] > array[i+1]) {
         var firstNumber = array[i];
         var secondNumber = array[i+1];
-
         array[i + 1] = firstNumber;
         array[i] = secondNumber;
         swapped++;
       }
+      counter++;
     }
-
     if (!swapped) {
       break;
     }
@@ -65,12 +64,24 @@ var bubbleSort = function(array) {
   return array;
 };
 
-console.log(bubbleSort([10,9,8,7,6,5,4]))
+// console.log(bubbleSort([10,9,8,7,6,5,4]))
 
-/* Worst case time complexity occurs when numbers are in reverse order:
+//[11,10,9,8]
+
+//[10,11,9,8]
+//[10,9,11,8]
+//[10,9,8,11]
+
+
+
+/* Worst case time complexity occurs when numbers are in reverse order and algorithm is basic:
     [10,9,8,7,6,5,4]
 
-    Would have to iterate array (n-1)^2 times, or O(n^2) time complexity
+    Would have to iterate array (n-1)^2 times, or O(n^2) time complexity since n-1 items would need to be bubbled up to the top
 
     Extra credit: if loop breaks early due to array being already sorted, time complexity is O(n) since only one pass-through needed
+
+    Moar credit: the first pass finds the largest element, so the second pass need not check the very last element. In general terms, the nth pass finds the nth largest element, so we can skip the final nth elements in the inner-loop. 
+
+    The time complexity of this algorithm would be O(n*(n-1)/2) [or slightly better than n^2] since it would need to iterate (n-1) + (n-2) + (n-3) + (n-4) + ... n-1 times
 */
