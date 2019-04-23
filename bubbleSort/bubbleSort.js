@@ -34,5 +34,43 @@
 
 
 var bubbleSort = function(array) {
-  // Your code here.
+  // I: array
+  // O: sorted array
+  // C: none
+  // E: empty array
+
+  // Sort largest number to the end n times
+    // for each element, if next element is greater:
+      // switch places
+    // else move on and repeat for next pair
+
+  var swapped = 0;
+  
+  for(var x = 0; x < array.length - 1; x++) {
+    for (var i = 0; i < array.length - 1; i++) {
+      if (array[i] > array[i+1]) {
+        var firstNumber = array[i];
+        var secondNumber = array[i+1];
+
+        array[i + 1] = firstNumber;
+        array[i] = secondNumber;
+        swapped++;
+      }
+    }
+
+    if (!swapped) {
+      break;
+    }
+  }
+  return array;
 };
+
+console.log(bubbleSort([10,9,8,7,6,5,4]))
+
+/* Worst case time complexity occurs when numbers are in reverse order:
+    [10,9,8,7,6,5,4]
+
+    Would have to iterate array (n-1)^2 times, or O(n^2) time complexity
+
+    Extra credit: if loop breaks early due to array being already sorted, time complexity is O(n) since only one pass-through needed
+*/
