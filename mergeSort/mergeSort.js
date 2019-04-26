@@ -105,6 +105,7 @@ var mergeSort = function(array) {
     // merge function
 
   var merge = (arr1, arr2) => {
+    
     var resultArr = [];
     var inputLength = arr1.length + arr2.length;
     var i = 0;
@@ -119,10 +120,10 @@ var mergeSort = function(array) {
           resultArr.push(arr2[j]);
           j++;
         }
-      } else if (arr1[i]) {
+      } else if (arr1[i] !== undefined) {
         resultArr.push(arr1[i]);
           i++;
-      } else if (arr2[j]) {
+      } else if (arr2[j] !== undefined) {
         resultArr.push(arr2[j]);
           j++;
       }
@@ -130,19 +131,11 @@ var mergeSort = function(array) {
     return resultArr;
   }
 
-  var middle = Math.floor((array.length - 1) / 2);
-
+  var middle = Math.floor((array.length) / 2);
   if (array.length > 1) {
-    return merge(mergeSort(array.split(0,middle)), mergeSort(array.split(middle, array.length)))
+   var arr1 = mergeSort(array.slice(0,middle))
+   var arr2 = mergeSort(array.slice(middle, array.length))
   } else return array;
+
+  return merge(arr1, arr2);
 };
-
-// mergeSort([1]);
-
-/*
-[2,3,1,9]
-
-[2,3] [1,9]
-merge(a, b) => 
-
-*/
