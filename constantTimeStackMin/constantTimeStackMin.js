@@ -25,7 +25,7 @@
   // add an item to the top of the stack
     this.push = function(value) {
       stack.push(value);
-      if (!supportingStack[0] || (stack[stack.length - 1] < supportingStack[supportingStack.length - 1])) {
+      if (supportingStack[0] === undefined || (stack[stack.length - 1] <= supportingStack[supportingStack.length - 1])) {
         supportingStack.push(value);
       }
     };
