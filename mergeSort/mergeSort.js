@@ -98,5 +98,51 @@
 
 
 var mergeSort = function(array) {
-  // Your code here.
+  // Find middle index
+  // mergesort first half
+  // mergesort second half
+  // return merged of two halves
+    // merge function
+
+  var merge = (arr1, arr2) => {
+    var resultArr = [];
+    var inputLength = arr1.length + arr2.length;
+    var i = 0;
+    var j = 0;
+
+    while (resultArr.length !== inputLength) {
+      if ((arr1[i] !== undefined) && (arr2[j] !== undefined)) {
+        if((arr1[i] <= arr2[j])) {
+          resultArr.push(arr1[i]);
+          i++;
+        } else {
+          resultArr.push(arr2[j]);
+          j++;
+        }
+      } else if (arr1[i]) {
+        resultArr.push(arr1[i]);
+          i++;
+      } else if (arr2[j]) {
+        resultArr.push(arr2[j]);
+          j++;
+      }
+    }
+    return resultArr;
+  }
+
+  var middle = Math.floor((array.length - 1) / 2);
+
+  if (array.length > 1) {
+    return merge(mergeSort(array.split(0,middle)), mergeSort(array.split(middle, array.length)))
+  } else return array;
 };
+
+// mergeSort([1]);
+
+/*
+[2,3,1,9]
+
+[2,3] [1,9]
+merge(a, b) => 
+
+*/
