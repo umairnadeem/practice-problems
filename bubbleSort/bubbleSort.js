@@ -45,7 +45,7 @@ var bubbleSort = function(array) {
     // else move on and repeat for next pair
 
   var swapped = 0;
-  
+  debugger;
   for(var x = 1; x < array.length; x++) {
     for (var i = 0; i < array.length - x; i++) {
       if (array[i] > array[i+1]) {
@@ -55,7 +55,6 @@ var bubbleSort = function(array) {
         array[i] = secondNumber;
         swapped++;
       }
-      counter++;
     }
     if (!swapped) {
       break;
@@ -64,7 +63,6 @@ var bubbleSort = function(array) {
   return array;
 };
 
-// console.log(bubbleSort([10,9,8,7,6,5,4]))
 
 //[11,10,9,8]
 
