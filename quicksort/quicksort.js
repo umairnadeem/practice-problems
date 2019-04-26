@@ -12,59 +12,42 @@
 
 
 var quicksort = function(array) {
-    // extract pivot index (rounded middle index)
-        // go through values except for pivot
-            // if value greater than pivot, push to arr2
-            // else push to arr1
-        // if arr1 or arr2 has only 1 value or no values:
-            // return arr1 + pivot + arr2 concat
-        // else 
-            // return concat quicksort(arr1) + pivot + quicksort(arr2)
 
-    var pivotIndex = Math.floor((array.length - 1)/2);
+    // define partition function, takes in array, and starting and ending index
+        // declare pivot as last value
+        // declare variable j which keeps track of the last-encountered, unswapped value that's larger than pivot
+        // go through array
+            // if current value is less than pivot, swap it with the value at j
+            // increment j
+        // swap the pivot with the value at j
+        // if array length == 0 or 1 
+            // return array
+        // else
+            // return partition(a, 0, j).concat(partition(a, j + 1, a.length -1))
 
-    var result = [];
-    var result2 = [];
+    var partition = a => {
+        var pivot = a[a.length - 1];
+        var j = 0;
+        debugger;
 
-    var arr1 = array.filter((elem, i) => i !== pivotIndex && elem < array[pivotIndex]);
-    var arr2 = array.filter((elem, i) => i !== pivotIndex && elem >= array[pivotIndex]);
+        if (a.length === 0) {
+            return a;
+        }
 
-    if (arr1.length === 1 || arr2.length === 1 || !arr1 || !arr2) {
-        result = result.concat(arr1);
-        result.push(array[pivotIndex]);
-        return result.concat(arr2);
-    } else {
-        result = quicksort(arr1);
-        result2 = quicksort(arr2);
-        return result.concat(result2);
+        for (var i = 0; i < a.length - 1; i++) {
+            if (a[i] <= pivot) {
+                [a[i], a[j]] = [a[j], a[i]];
+                j++;
+            }
+        }
+
+        [a[a.length - 1], a[j]] = [a[j], a[a.length - 1]];
+
+        var firstSection = a.slice(0,j);
+        var secondSection = a.slice(j,a.length);
+
+        return (a.length === 1 || a.length === 0 ? a : partition(firstSection).concat(partition(secondSection)));
     }
 
-    console.log(arr1,arr2)
+    return partition(array);
 };
-
-console.log(quicksort([9,8,7,6,5,4]))
-
-/*
-[9,8,7,6,5,4]
-
-pivot = 7
-
-arr1 = [9,8]
-arr2 = [6,5,4]
-
-pivot1 = 9
-    arr1 = [8]
-    arr2 = [];
-
-    when empty array or 1 element in array:
-        returned arr = [8,9]
-
-pivot2 = 5
-    arr1 = [6]
-    arr2 = [4]
-
-    when empty or 1 element:
-        return arr = [4,5,6]
-
-concat [4,5,6] + [7]+ [8,9]
-*/
