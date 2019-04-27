@@ -48,7 +48,7 @@
 // return output deck
 
 var shuffleDeck = function(deck) {
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 2; i++) {
     deck.forEach((elem, i) => {
       var random = Math.floor(Math.random()*(deck.length - i) + i);
       [deck[random], deck[i]] = [deck[i], deck[random]];
