@@ -53,16 +53,13 @@ var shuffleDeck = function(deck) {
   var random = 0;
 
   deck.forEach(() => {
-    // debugger;
-    random = Math.ceil(Math.random()*(duplicateDeck.length - 1));
-    console.log(random);
+    random = Math.floor(Math.random()*(duplicateDeck.length - 1));
     outputDeck.push(duplicateDeck[random]);
     duplicateDeck.splice(random, 1);
   });
 
   return outputDeck;
 };
-
 
 // Ordered deck generator provided for your testing convenience
 // (You may alter this function, but an unaltered copy will be used for tests.)
