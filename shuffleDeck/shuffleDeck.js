@@ -48,18 +48,16 @@
 // return output deck
 
 var shuffleDeck = function(deck) {
-  var outputDeck = [];
-  var duplicateDeck = deck.map(x => x);
-  var random = 0;
-
-  deck.forEach(() => {
-    random = Math.floor(Math.random()*(duplicateDeck.length));
-    outputDeck.push(duplicateDeck[random]);
-    duplicateDeck.splice(random, 1);
-  });
-
-  return outputDeck;
+  for (var i = 0; i < 10; i++) {
+    deck.forEach((elem, i) => {
+      var random = Math.floor(Math.random()*(deck.length - i) + i);
+      [deck[random], deck[i]] = [deck[i], deck[random]];
+    });
+  }
+  return deck;
 };
+
+// console.log(shuffleDeck(["A♥","2♥","3♥"]))
 
 // Ordered deck generator provided for your testing convenience
 // (You may alter this function, but an unaltered copy will be used for tests.)
