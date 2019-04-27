@@ -36,24 +36,24 @@
  *   See https://www.dartmouth.edu/~chance/teaching_aids/books_articles/Mann.pdf .
  */
 
+// create an empty output deck
+// create a duplicate working deck
+// declare an empty random variable
+
+// loop over the input deck
+  // generate a random index, bounded to deck size
+  // push the value of random index from working deck into output deck
+  // remove that index from working deck
+
+// return output deck
+
 var shuffleDeck = function(deck) {
-  // create an empty output deck
-  // create a duplicate working deck
-  // declare an empty random variable
-
-  // loop over the input deck
-    // generate a random index, bounded to deck size
-    // push the value of random index from working deck into output deck
-    // remove that index from working deck
-
-  // return output deck
-
   var outputDeck = [];
   var duplicateDeck = deck.map(x => x);
   var random = 0;
 
   deck.forEach(() => {
-    random = Math.floor(Math.random()*(duplicateDeck.length - 1));
+    random = Math.round(Math.round(Math.random()*(duplicateDeck.length - 1)*100)/100);
     outputDeck.push(duplicateDeck[random]);
     duplicateDeck.splice(random, 1);
   });
