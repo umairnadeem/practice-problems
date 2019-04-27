@@ -53,7 +53,7 @@ var shuffleDeck = function(deck) {
   var random = 0;
 
   deck.forEach(() => {
-    random = Math.round(Math.round(Math.random()*(duplicateDeck.length - 1)*100)/100);
+    random = Math.round(Math.round(Math.random()*(duplicateDeck.length - 1)*100000)/100000);
     outputDeck.push(duplicateDeck[random]);
     duplicateDeck.splice(random, 1);
   });
