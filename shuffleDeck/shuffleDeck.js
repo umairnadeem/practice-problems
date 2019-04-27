@@ -17,8 +17,13 @@
  * Extra credit:
  *   - Even a naive algorithm can easily run in linear time. However, does your
  *     algorithm remain unbiased as N (the deck size) increases? How do you know?
+ * 
+ *     A: As the deck size increases, my algorithm still remains unbiased since the random number generated  *        will be from 0 to 1 and multiplied by deck size to generate the random index. The random element            itself is not influenced by deck size.
+ * 
  *   - Once you have created a properly random, linear algorithm, what is its space complexity?
  *     There is an algorithm that uses O(N) time and O(1) space (i.e., an in-place shuffle).
+ * 
+ *     A: The space complexity of my algorithm is currently linear, since it generates a duplicate deck.
  *
  * A further note on randomness:
  *   Technically, a computer-shuffled deck will usually be "pseudorandom",
@@ -32,8 +37,32 @@
  */
 
 var shuffleDeck = function(deck) {
-  // Your code here
+  // create an empty output deck
+  // create a duplicate working deck
+  // declare an empty random variable
+
+  // loop over the input deck
+    // generate a random index, bounded to deck size
+    // push the value of random index from working deck into output deck
+    // remove that index from working deck
+
+  // return output deck
+
+  var outputDeck = [];
+  var duplicateDeck = deck.map(x => x);
+  var random = 0;
+
+  deck.forEach(() => {
+    debugger;
+    random = Math.ceil(Math.random()*(duplicateDeck.length - 1));
+    console.log(random);
+    outputDeck.push(duplicateDeck[random]);
+    duplicateDeck.splice(random, 1);
+  });
+
+  return outputDeck;
 };
+
 
 // Ordered deck generator provided for your testing convenience
 // (You may alter this function, but an unaltered copy will be used for tests.)
