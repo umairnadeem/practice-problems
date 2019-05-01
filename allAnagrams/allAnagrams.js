@@ -22,36 +22,19 @@ var allAnagrams = function(string) {
 
   var arr = [];
 
-  // loop over each char
-    // swap char 0 with char 0
-    // swap char 0,1
-    // swap char 0,2
-    
-    // swap char 1 with char 0
-    // swap char 1 with char 1
-    // swap char 1 with char 2
-
-    // swap char 2 with char 0
-    // swap char 2 with char 1
-    // swap char 2 with char 2
-  // var swapper = (str, x, y) => {
-  //   for (let i in string) {
-  //     var strArr = string.split('');
-  //     [strArr[x], strArr[y]] = [strArr[y], strArr[x]];
-  //     arr.push(strArr.join(''));
-  //   }
-  //   return str;
-  // }
-
-  for (let x in string) {
-    for (let y in string) {
-      var strArr = string.split('');
-      [strArr[x], strArr[y]] = [strArr[y], strArr[x]];
-      arr.push(strArr.join(''));
+  var swapper = (str, start, end) => {
+    debugger;
+    for (var x = start; x <= end; x++) {
+      for (var y = start; y <= end; y++) {
+        var strArr = str.split('');
+        [strArr[x], strArr[y]] = [strArr[y], strArr[x]];
+        var output = strArr.join('');
+        arr.push(output);
+        swapper(output, x + 1, string.length - 1);
+      }
     }
   }
-
-  // return arr;
+  swapper(string, 0, string.length - 1)
 
   return arr.filter((str, i) => arr.indexOf(str) === i);
 };
