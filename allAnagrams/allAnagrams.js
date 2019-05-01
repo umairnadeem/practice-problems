@@ -23,7 +23,7 @@ var allAnagrams = function(string) {
   var arr = [];
 
   var swapper = (str, start, end) => {
-    debugger;
+    // debugger;
     for (var x = start; x <= end; x++) {
       for (var y = start; y <= end; y++) {
         var strArr = str.split('');
@@ -39,4 +39,4 @@ var allAnagrams = function(string) {
   return arr.filter((str, i) => arr.indexOf(str) === i);
 };
 
-// console.log(allAnagrams('abc'));
+console.log(allAnagrams('abcc'));
