@@ -39,4 +39,4 @@ var allAnagrams = function(string) {
   return arr.filter((str, i) => arr.indexOf(str) === i);
 };
 
-console.log(allAnagrams('abcc'));
+// console.log(allAnagrams('appsers'));
