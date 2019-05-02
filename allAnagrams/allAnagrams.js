@@ -12,6 +12,24 @@
   * console.log(anagrams); // [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
   */
 
+var allAnagrams = (string) => {
+  var arr = [];
+
+  var permutator = () => {
+    for (let index in string) {
+      var leftOver = string.slice(0,index) + string.slice(parseInt(index) + 1,string.length);
+      for (let elem of allAnagrams(leftOver)) {
+        arr.push(string[index] + elem);
+      }
+    }
+    return arr;
+  }
+
+  return string.length === 1 ? [string] : (permutator());
+}
+
+// old algo:
+
 // var allAnagrams = function(string) {
 //   // n! possibilities
 
@@ -38,23 +56,3 @@
 //   // return arr;
 //   return arr.filter((str, i) => arr.indexOf(str) === i);
 // };
-
-
-
-var allAnagrams = (string) => {
-  var arr = [];
-  if (string.length === 1) {
-    return [string];
-  }
-
-  for (let index in string) {
-    var leftOver = string.slice(0,index) + string.slice(parseInt(index) + 1,string.length);
-    for (let elem of allAnagrams(leftOver)) {
-      arr.push(string[index] + elem);
-    }
-  }
-
-  return arr;
-}
-
-
