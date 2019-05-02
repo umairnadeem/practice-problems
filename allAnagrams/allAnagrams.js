@@ -16,8 +16,11 @@ var allAnagrams = (string) => {
   var arr = [];
 
   var permutator = () => {
-    for (let index in string) {
-      var leftOver = string.slice(0,index) + string.slice(parseInt(index) + 1,string.length);
+    for (let index = 0; index < string.length; index++) {
+      if (string.indexOf(string[index]) !== index) {
+        continue;
+      }
+      var leftOver = string.slice(0,index) + string.slice(index + 1,string.length);
       for (let elem of allAnagrams(leftOver)) {
         arr.push(string[index] + elem);
       }
@@ -27,7 +30,6 @@ var allAnagrams = (string) => {
 
   return string.length === 1 ? [string] : (permutator());
 }
-
 // old algo:
 
 // var allAnagrams = function(string) {
