@@ -12,31 +12,49 @@
   * console.log(anagrams); // [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
   */
 
-var allAnagrams = function(string) {
-  // n! possibilities
+// var allAnagrams = function(string) {
+//   // n! possibilities
 
-  // I: string
-  // O: array of string permutations
-  // C: none
-  // E: empty string, duplicates
+//   // I: string
+//   // O: array of string permutations
+//   // C: none
+//   // E: empty string, duplicates
 
+//   var arr = [];
+
+//   var swapper = (str, start, end) => {
+//     // debugger;
+//     for (var x = start; x <= end; x++) {
+//       for (var y = start + 1; y <= end; y++) {
+//         var strArr = str.split('');
+//         [strArr[x], strArr[y]] = [strArr[y], strArr[x]];
+//         var output = strArr.join('');
+//         arr.push(output);
+//         swapper(output, x + 1, string.length - 1);
+//       }
+//     }
+//   }
+//   swapper(string, 0, string.length - 1)
+//   // return arr;
+//   return arr.filter((str, i) => arr.indexOf(str) === i);
+// };
+
+
+
+var allAnagrams = (string) => {
   var arr = [];
+  if (string.length === 1) {
+    return [string];
+  }
 
-  var swapper = (str, start, end) => {
-    // debugger;
-    for (var x = start; x <= end; x++) {
-      for (var y = start; y <= end; y++) {
-        var strArr = str.split('');
-        [strArr[x], strArr[y]] = [strArr[y], strArr[x]];
-        var output = strArr.join('');
-        arr.push(output);
-        swapper(output, x + 1, string.length - 1);
-      }
+  for (let index in string) {
+    var leftOver = string.slice(0,index) + string.slice(parseInt(index) + 1,string.length);
+    for (let elem of allAnagrams(leftOver)) {
+      arr.push(string[index] + elem);
     }
   }
-  swapper(string, 0, string.length - 1)
 
-  return arr.filter((str, i) => arr.indexOf(str) === i);
-};
+  return arr;
+}
 
-// console.log(allAnagrams('appsers'));
+
