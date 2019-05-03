@@ -25,7 +25,30 @@ makeChange(2) === 2
 */
 
 var makeChange = function(total) {
+    var denominations = [1,2,5,10,20,50,100,200];
+    var permutations = 0;
 
+    function permutator(k) {
+        var sum = 0;
+        if (k === 1 || k === 0) {
+            permutations++;
+            return;
+        }
+        
+        denominations.forEach(n => {
+            if (n <= (k - sum)) {
+                sum += n;
+                permutator(k - sum);
+                sum = 0;
+            }
+        });
+    }
+
+    permutator(total);
+
+    return permutations;
 };
+
+// console.log(makeChange(10));
 
 
