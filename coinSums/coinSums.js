@@ -34,14 +34,16 @@ var makeChange = function(total) {
             permutations++;
             return;
         }
+        if (arr[0] <= k) {
+            arr.forEach((n, i) => {
+                if (n <= (k - sum)) {
+                    sum += n;
+                    permutator(k - sum, arr.slice(i));
+                    sum = 0;
+                }
+            });
+        }
         
-        arr.forEach((n, i) => {
-            if (n <= (k - sum)) {
-                sum += n;
-                permutator(k - sum, arr.slice(i));
-                sum = 0;
-            }
-        });
     }
 
     permutator(total, denominations);
