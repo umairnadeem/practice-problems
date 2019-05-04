@@ -18,4 +18,35 @@
  */
 
 var powerSet = function(str) {
+    var arr = [];
+
+    function binaryCount(n)  {
+        return (n >>> 0).toString(2);
+    }
+
+    function pad(string, length) {
+        output = '';
+        for (var i = string.length; i < length; i++) {
+            output += '0';
+        }
+        output += string;
+        return output;
+    }
+
+    for (var i = 0; i < str.length*str.length; i++) {
+        var binaryString = pad(binaryCount(i), str.length);
+        var tempOut = '';
+        for (let index in binaryString) {
+            
+            if (parseInt(binaryString[index])) {
+                tempOut += str[index];
+            }
+        }
+
+        arr.push(tempOut);
+    }
+
+    return arr;
 };
+
+// console.log(powerSet('abc'));
