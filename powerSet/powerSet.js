@@ -40,14 +40,15 @@ var powerSet = function(str) {
         var tempOut = '';
         for (let index in binaryString) {
             if (parseInt(binaryString[index])) {
-                tempOut += str[index];
+                if (tempOut.indexOf(str[index]) === -1) {
+                    tempOut += str[index];
+                }       
             }
         }
 
         arr.push(tempOut);
     }
-
-    return arr;
+    return arr.filter((x, i)=> arr.indexOf(x) === i);
 };
 
-// console.log(powerSet('a'));
+console.log(powerSet('bbbaaa'));
