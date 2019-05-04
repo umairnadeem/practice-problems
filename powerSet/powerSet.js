@@ -33,11 +33,12 @@ var powerSet = function(str) {
         return output;
     }
 
-    for (var i = 0; i < str.length*str.length; i++) {
+    var loopLength = str.length <= 1? str.length + 1: str.length*str.length;
+
+    for (var i = 0; i < loopLength; i++) {
         var binaryString = pad(binaryCount(i), str.length);
         var tempOut = '';
         for (let index in binaryString) {
-            
             if (parseInt(binaryString[index])) {
                 tempOut += str[index];
             }
@@ -49,4 +50,4 @@ var powerSet = function(str) {
     return arr;
 };
 
-// console.log(powerSet('abc'));
+// console.log(powerSet('a'));
