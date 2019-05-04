@@ -25,7 +25,7 @@ var powerSet = function(str) {
     }
 
     function pad(string, length) {
-        output = '';
+        var output = '';
         for (var i = string.length; i < length; i++) {
             output += '0';
         }
