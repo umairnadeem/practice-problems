@@ -15,7 +15,7 @@
 var allAnagrams = (str) => {
   var output = [];
 
-  var generator = ((initial = '', remaining = str) => {
+  var generator = (initial = '', remaining = str) => {
       if (remaining.length === 0) {
           output.push(initial);
           return;
@@ -26,7 +26,8 @@ var allAnagrams = (str) => {
               generator(initial + remaining[index], remainder);
           }
       }
-  })();
+  };
+  generator();
   return output;
 }
 
