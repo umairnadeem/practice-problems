@@ -36,6 +36,20 @@ var Tree = function(value) {
 };
 
 Tree.prototype.DFSelect = function(filter) {
+  var arr = [];
+  
+  var DFTraverser = (node, depth = -1) => {
+    depth++;
+    if (filter(node.value, depth)) {
+      arr.push(node.value);
+    }
+    node.children.forEach(child => {
+      DFTraverser(child, depth);
+    });
+  };
+
+  DFTraverser(this);
+  return arr;
 };
 
 

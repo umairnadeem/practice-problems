@@ -12,24 +12,25 @@
   * console.log(anagrams); // [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
   */
 
-var allAnagrams = (string) => {
-  var arr = [];
+var allAnagrams = (str) => {
+  var output = [];
 
-  var permutator = () => {
-    for (let index = 0; index < string.length; index++) {
-      if (string.indexOf(string[index]) !== index) {
-        continue;
+  var generator = ((initial = '', remaining = str) => {
+      if (remaining.length === 0) {
+          output.push(initial);
+          return;
       }
-      var leftOver = string.slice(0,index) + string.slice(index + 1,string.length);
-      for (let elem of allAnagrams(leftOver)) {
-        arr.push(string[index] + elem);
+      for (let index in remaining) {
+          var remainder = remaining.slice(0, index) + remaining.slice(parseInt(index) + 1);
+          if (remaining.indexOf(remaining[index]) == index) {
+              generator(initial + remaining[index], remainder);
+          }
       }
-    }
-    return arr;
-  }
-
-  return string.length === 1 ? [string] : (permutator());
+  })();
+  return output;
 }
+
+console.log(allAnagrams('debitcard'));
 
 // old algo:
 

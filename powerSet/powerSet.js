@@ -51,4 +51,5 @@ var powerSet = function(str) {
     return arr.filter((x, i)=> arr.indexOf(x) === i);
 };
 
-console.log(powerSet('bbbaaa'));
+console.log(powerSet('abc'));
+
