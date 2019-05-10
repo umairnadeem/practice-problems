@@ -12,4 +12,15 @@
   *
   */
 var deepEquals = function(apple, orange) {
+  for (let key in apple) {
+    if (typeof apple[key] === 'object') {
+      return deepEquals(apple[key], orange[key])
+    } else if (apple[key] !== orange[key]) {
+      return false;
+    }
+  }
+  return true;
 };
+
+// console.log(deepEquals({a:1, b: [{c:3}]},{a:1, b: [{c:3}]})); // true
+// console.log(deepEquals({a:1, b: {c:5}},{a:1, b: {c:6}})); // false
