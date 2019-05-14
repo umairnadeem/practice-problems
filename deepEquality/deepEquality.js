@@ -25,5 +25,5 @@ var deepEquals = function(apple, orange) {
   return true;
 };
 
-// console.log(deepEquals({a:1, b: {c:3}},{a:1, b: {c:3}})); // true
-// console.log(deepEquals({a:1, b: {c:5}},{a:1, b: {c:6}})); // false
+// console.log(deepEquals({a:1, b: {c:3, d:9}},{a:1, b: {c:3, d:10}})); // true
+// // console.log(deepEquals({a:1, b: {c:5}},{a:1, b: {c:6}})); // false

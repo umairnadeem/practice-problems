@@ -37,6 +37,44 @@
  *
  */
 
+ // Invoke each function in the tasks array
+ // Define a callback as the first parameter of each function
+// Each callback takes in a 'result' parameter
+// Create an array with each result in order
+// Pass in that array as the 1st argument of the callback parameter
+
 
 var asyncMap = function(tasks, callback) {
+    var results = [];
+
+    var recursiveCaller = (n) => {
+        if (tasks[n] !== undefined) {
+            tasks[n](result => {
+                results.push(result);
+                recursiveCaller(n+1);
+            });
+        } else {
+            callback(results);
+        }
+    }
+
+    recursiveCaller(0);
 };
+
+//  asyncMap([
+//   function(cb){
+//     setTimeout(function(){
+//       cb('one');
+//     }, 200);
+//   },
+//   function(cb){
+//     setTimeout(function(){
+//       cb('two');
+//     }, 100);
+//   }
+//  ],
+//   function(results){
+//     // the results array will equal ['one','two'] even though
+//     // the second function had a shorter timeout.
+//     console.log(results); // ['one', 'two']
+//  });
