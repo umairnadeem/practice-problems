@@ -33,8 +33,23 @@
 
 'use strict';
 
-var compose = function() {
+var compose = function(...args) {
+    var recursiveCall = (n, x) => n ? args[n](recursiveCall(n - 1, x)) : args[n](x)
+    return x => recursiveCall(args.length - 1, x)
 };
 
+
 var pipe = function() {
+    var recursiveCall = (n, x) => n ? args[n](recursiveCall(n - 1, x)) : args[n](x)
+    return x => recursiveCall(args.length - 1, x)
 };
+
+// var greet = function(name){ return 'hi: ' + name;}
+// var exclaim = function(statement) { return statement + '!';}
+// var welcome = compose(greet, exclaim);
+// console.log(welcome('phillip')); // 'hi: PHILLIP!'
+
+// var add2 = function(number){ return number + 2; }
+// var multiplyBy3 = function(number){ return number * 3; }
+// console.log(compose(add2, multiplyBy3)(5)) // 21
+// console.log(compose(add2, multiplyBy3, multiplyBy3)(5)) // 63
