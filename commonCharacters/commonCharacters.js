@@ -12,6 +12,26 @@
 
 
 
-var commonCharacters = function(string1, string2) {
-  // TODO: Your code here!
+var commonCharacters = function(...args) {
+  let pivotString = args[0];
+  let otherStrings = args.slice(1);
+  let output = '';
+
+  for (let pivotChar of pivotString) {
+    let charExists = true;
+    otherStrings.forEach(string => {
+      if (!string.includes(pivotChar)) {
+        charExists = false;
+      }
+    });
+    if (charExists) {
+      output += pivotChar;
+    }
+  }
+
+  // Eliminate spaces and duplicates
+  output = Array.from(new Set(output.replace(/ /g, '').split(''))).join('');
+  return output;
 };
+
+// console.log(commonCharacters('aa', 'aa'));
