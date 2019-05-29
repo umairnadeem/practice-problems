@@ -95,6 +95,7 @@ BinaryHeap.prototype.insert = function (value) {
 BinaryHeap.prototype.removeRoot = function () {
   let last = this._heap.length - 1;
   let index = 0;
+  let root = this.getRoot();
   [this._heap[index], this._heap[last]] = [this._heap[last], this._heap[index]];
   this._heap.pop();
   while (index < last) {
@@ -108,6 +109,7 @@ BinaryHeap.prototype.removeRoot = function () {
       index = child;
     } else break;
   }
+  return root;
 }
 
 const heapSort = (array) => {
@@ -119,11 +121,10 @@ const heapSort = (array) => {
   });
 
   array.forEach(value => {
-    output.push(heap.getRoot());
-    heap.removeRoot();
+    output.push(heap.removeRoot());
   });
 
   return output;
 }
 
-// console.log(heapSort([9,43,5,2,4]));
+// console.log(heapSort([9,43,5,2,4,4]));
