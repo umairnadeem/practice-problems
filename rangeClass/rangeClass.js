@@ -39,14 +39,14 @@
  */
 
 
-var Range = function(start, end = start, step = 1) {
+var Range = function(start = null, end = start, step = 1) {
   this.start = start;
   this.end = end;
   this.step = step;
 };
 
 Range.prototype.size = function () {
-  return Math.ceil(((Math.abs(this.end - this.start) + 1) / this.step));
+  return this.start ? Math.ceil(((Math.abs(this.end - this.start) + 1) / this.step)) : null;
 };
 
 Range.prototype.each = function (callback) {
@@ -55,30 +55,30 @@ Range.prototype.each = function (callback) {
     for (let i = this.start; i < this.end; i += increment) {
       callback(i);
     }
-  } else {
+  } else if (this.start > this.end) {
     for (let i = this.start; i > this.end; i += increment) {
       callback(i);
     }
+  } else if (this.start) {
+    callback(this.start);
   }
 };
 
 Range.prototype.includes = function (val) {
-  let bool = false;
-  this.each(n => {
-    if (val === n) {
-      bool = true;
-    }
-  });
-  return bool;
+  if (this.start < this.end) {
+    return (val - this.start) % this.step === 0 && val < this.end && val > this.start;
+  } else {
+    return (val - this.start) % this.step === 0 && val > this.end && val < this.start;
+  }
 };
 
 var range = new Range(1);
 
 // var myRange = new Range(0,10); // a new range representing the numbers between 0 and 10 (inclusively)
-// var evenNumbers = new Range(2,-9,2); // A range with the even numbers 2, 4, 6, and 8.
+// var evenNumbers = new Range(2,8,2); // A range with the even numbers 2, 4, 6, and 8.
 // evenNumbers.each(function(val){
 //   console.log(val+"!");
 // });
 // console.log("Who do we appreciate!?");
 // console.log(evenNumbers.size()) //should be 4
-// console.log(evenNumbers.includes(-1)) //should be true, evenNumbers.includes(3) should be false
+// console.log(evenNumbers.includes(3)) //should be true, evenNumbers.includes(3) should be false
