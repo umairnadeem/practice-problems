@@ -67,10 +67,10 @@
 // and then iteratively returns the root of the `BinaryHeap` until its empty, thus returning a sorted array.
 
 
-function BinaryHeap () {
+function BinaryHeap (callback = (i, j) => i < j) {
   this._heap = [];
   // this compare function will result in a minHeap, use it to make comparisons between nodes in your solution
-  this._compare = function (i, j) { return i < j };
+  this._compare = function (i, j) { return callback(i,j) };
 }
 
 // This function works just fine and shouldn't be modified
@@ -79,9 +79,51 @@ BinaryHeap.prototype.getRoot = function () {
 }
 
 BinaryHeap.prototype.insert = function (value) {
-  // TODO: Your code here
+  this._heap.push(value);
+  let index = this._heap.length - 1;
+  while (index > 0) {
+    let current = this._heap[index];
+    let parentIndex = Math.floor((index - 1) / 2);
+    let parent = this._heap[parentIndex];
+    if (this._compare(current, parent)) {
+      [this._heap[index], this._heap[parentIndex]] = [this._heap[parentIndex], this._heap[index]];
+    } else break;
+    index = parentIndex;
+  }
 }
 
 BinaryHeap.prototype.removeRoot = function () {
-  // TODO: Your code here
+  let last = this._heap.length - 1;
+  let index = 0;
+  [this._heap[index], this._heap[last]] = [this._heap[last], this._heap[index]];
+  this._heap.pop();
+  while (index < last) {
+    let children = [index * 2 + 1, index * 2 + 2];
+    let child;
+    if (this._compare(this._heap[children[0]], this._heap[children[1]])) {
+      child = children[0];
+    } else child = children[1];
+    if (this._compare(this._heap[child], this._heap[index])) {
+      [this._heap[child], this._heap[index]] = [this._heap[index], this._heap[child]];
+      index = child;
+    } else break;
+  }
 }
+
+const heapSort = (array) => {
+  let heap = new BinaryHeap();
+  let output = [];
+
+  array.forEach(value => {
+    heap.insert(value);
+  });
+
+  array.forEach(value => {
+    output.push(heap.getRoot());
+    heap.removeRoot();
+  });
+
+  return output;
+}
+
+// console.log(heapSort([9,43,5,2,4]));
