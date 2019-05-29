@@ -66,16 +66,18 @@ Range.prototype.each = function (callback) {
 
 Range.prototype.includes = function (val) {
   if (this.start < this.end) {
-    return (val - this.start) % this.step === 0 && val < this.end && val > this.start;
+    return (val - this.start) % this.step === 0 && val <= this.end && val >= this.start;
   } else {
-    return (val - this.start) % this.step === 0 && val > this.end && val < this.start;
+    return (val - this.start) % this.step === 0 && val >= this.end && val <= this.start;
   }
 };
 
-// var evenNumbers = new Range(2,-10); // A range with the even numbers 2, 4, 6, and 8.
-// evenNumbers.each(function(val){
-//   console.log(val+"!");
-// });
-// console.log("Who do we appreciate!?");
-// console.log(evenNumbers.size()) //should be 4
-// console.log(evenNumbers.includes(3)) //should be true, evenNumbers.includes(3) should be false
+// var justOne = new Range(1);
+// console.log(justOne.includes(1))
+// console.log(justOne.includes(50))
+
+// var threes = new Range(3, 100, 3);
+// console.log(threes.includes(3))
+// console.log(threes.includes(4))
+// console.log(threes.includes(33))
+// console.log(threes.includes(99))
