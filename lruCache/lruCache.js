@@ -31,18 +31,44 @@
  */
 
 var LRUCache = function (limit) {
+  this.limit = limit;
+  this.size = 0;
+  this.cache = {};
+  this.queue = new List();
 };
 
-var LRUCacheItem = function (val, key) {
+var LRUCacheItem = function (key, val) {
+  this.key = key;
+  this.val = val;
 };
 
 LRUCache.prototype.size = function () {
+  return this.size;
 };
 
 LRUCache.prototype.get = function (key) {
+  if (this.cache[key]) {
+    // move to end of queue
+    this.queue.moveToEnd(this.cache[key].key);
+  
+    // return value
+    return this.cache[key].val;
+  } else return null;
 };
 
 LRUCache.prototype.set = function (key, val) {
+  // console.log(this.size, this.limit)
+  if (this.size < this.limit) {
+    let node = this.queue.push(key);
+    this.cache[key] = new LRUCacheItem(node, val);
+    this.size++;
+  } else {
+    // console.log('delete ', this.cache[this.queue.head.val])
+    delete this.cache[this.queue.head.val];
+    let node = this.queue.push(key);
+    this.cache[key] = new LRUCacheItem(node, val);
+    this.queue.shift();
+  }
 };
 
 
@@ -171,3 +197,20 @@ ListNode.prototype.delete = function () {
   if (this.next) { this.next.prev = this.prev; }
 };
 
+// var cache = new LRUCache(3); // limit of 3 items
+// cache.set("item1", 1);
+// cache.set("item2", 2);
+// cache.set("item3", 3);
+// cache.set("item4", 4);
+// console.log(cache.get("item3")) //=> 3
+// console.log(cache.get("item2")) //=> 2
+// // item1 was removed because it was the oldest item by insertion/usage
+// console.log(cache.get("item1")) //=> null
+// // item4 is removed to make room, because it is the oldest by usage,
+// // which takes priority.
+// cache.set("item5", 5);
+// // item3 is also removed, because it was retrieved before item2 was
+// // last retrieved.
+// cache.set("item6", 6);
+
+// console.log(cache.get("item3"))
