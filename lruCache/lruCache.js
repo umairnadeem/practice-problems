@@ -32,7 +32,7 @@
 
 var LRUCache = function (limit) {
   this.limit = limit;
-  this.size = 0;
+  this.length = 0;
   this.cache = {};
   this.queue = new List();
 };
@@ -43,7 +43,7 @@ var LRUCacheItem = function (key, val) {
 };
 
 LRUCache.prototype.size = function () {
-  return this.size;
+  return this.length;
 };
 
 LRUCache.prototype.get = function (key) {
@@ -58,10 +58,10 @@ LRUCache.prototype.get = function (key) {
 
 LRUCache.prototype.set = function (key, val) {
   // console.log(this.size, this.limit)
-  if (this.size < this.limit) {
+  if (this.length < this.limit) {
     let node = this.queue.push(key);
     this.cache[key] = new LRUCacheItem(node, val);
-    this.size++;
+    this.length++;
   } else {
     // console.log('delete ', this.cache[this.queue.head.val])
     delete this.cache[this.queue.head.val];
@@ -214,3 +214,9 @@ ListNode.prototype.delete = function () {
 // cache.set("item6", 6);
 
 // console.log(cache.get("item3"))
+
+var cache = new LRUCache(10);
+        for (var i = 0; i < 15; i++) {
+          cache.set(i, i);
+        }
+        console.log(cache.size())
