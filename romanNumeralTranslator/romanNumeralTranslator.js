@@ -28,6 +28,23 @@ var DIGIT_VALUES = {
 };
 
 var translateRomanNumeral = function(romanNumeral) {
-// TODO: Implement me!
 
+  // if input empty, return 0
+  if (romanNumeral === '') {
+    return 0;
+  } else if (typeof romanNumeral !== 'string') {
+
+    // if input not a string, return null
+    return null;
+  } else if (DIGIT_VALUES[romanNumeral[0]] >= DIGIT_VALUES[romanNumeral[1]] || romanNumeral.length === 1) {
+
+    // if number infront is smaller, add this number to recursive call from 1 char ahead
+    return DIGIT_VALUES[romanNumeral[0]] + translateRomanNumeral(romanNumeral.slice(1));
+  } else {
+   
+    // if number infront is larger, subtract both numbers and add them to recursive call from 2 chars ahead
+    return DIGIT_VALUES[romanNumeral[1]] - DIGIT_VALUES[romanNumeral[0]] + translateRomanNumeral(romanNumeral.slice(2));
+  }
 };
+
+// console.log(translateRomanNumeral('XXIX'));
