@@ -22,17 +22,18 @@ function reverseInteger(number){
   function recursiveReverse(n) {
     let decimalRecursive = Math.pow(10, Math.floor(Math.log10(n))); // 1000
     let extract = Math.floor(n / decimalRecursive) * decimalRecursive; // 3000
-    if (decimalRecursive !== 1) {
+    if (decimalRecursive > 1) {
       recursiveReverse(n - extract);
     }
     output += Math.floor(n / decimalRecursive) * decimalMain;
     decimalMain /= 10;
   }
 
-  recursiveReverse(number);
+  if (number) recursiveReverse(number);
+  else return 0;
 
   return output;
 }
 
 
-// console.log(reverseInteger(5423));
+// console.log(reverseInteger(0));
