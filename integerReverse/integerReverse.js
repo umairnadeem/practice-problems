@@ -29,11 +29,11 @@ function reverseInteger(number){
     decimalMain /= 10;
   }
 
-  if (number) recursiveReverse(number);
-  else return 0;
+  if (number % 10 === number) recursiveReverse(number);
+  else return number;
 
   return output;
 }
 
 
-// console.log(reverseInteger(0));
+console.log(reverseInteger(0));
