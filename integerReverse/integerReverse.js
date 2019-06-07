@@ -20,12 +20,12 @@ function reverseInteger(number){
   let output = 0;
 
   function recursiveReverse(n) {
-    let decimalRecursive = Math.pow(10, Math.floor(Math.log10(n))); // 1000
-    let extract = Math.floor(n / decimalRecursive) * decimalRecursive; // 3000
+    let decimalRecursive = n ? Math.pow(10, Math.floor(Math.log10(n))) : 0; // 1000
+    let extract = decimalRecursive ? Math.floor(n / decimalRecursive) * decimalRecursive : 0; // 3000
     if (decimalRecursive > 1) {
       recursiveReverse(n - extract);
     }
-    output += Math.floor(n / decimalRecursive) * decimalMain;
+    output += decimalRecursive ? Math.floor(n / decimalRecursive) * decimalMain : 0;
     decimalMain /= 10;
   }
 
@@ -36,4 +36,23 @@ function reverseInteger(number){
 }
 
 
-console.log(reverseInteger(0));
+// console.log(reverseInteger(123));
+
+// function reverseInteger(number) {
+//   let result = 0;
+
+//   const reverseInput = (num) => {
+//     if (num < 1) {
+//       return;
+//     }
+//     let nextDigit = num % 10;
+//     let orderOfMagnitude = Math.floor(Math.log10(num));
+//     result += nextDigit * (Math.pow(10, orderOfMagnitude));
+//     let nextNum = (num - nextDigit) / 10;
+//     reverseInput(nextNum);
+//   }
+
+//   reverseInput(number);
+
+//   return result;
+// } 
