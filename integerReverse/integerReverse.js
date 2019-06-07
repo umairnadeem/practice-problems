@@ -29,7 +29,7 @@ function reverseInteger(number){
     decimalMain /= 10;
   }
 
-  if (number % 10 === number) recursiveReverse(number);
+  if (number % 10 !== number) recursiveReverse(number);
   else return number;
 
   return output;
