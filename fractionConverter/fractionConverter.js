@@ -12,6 +12,12 @@
  *
  */
 
-var toFraction = function(number) {
-  // Your code here
-};
+// var toFraction = function(number) {
+//   // convert number to string
+//   // find length of the string after the decimal
+//   // multiply number by 10^length
+//   // find the smaller of the two: 10^length and the number itself
+//   // divide both numbers by the smaller of the two
+//     // if both divisible, divide both numbers by that amount, return
+//     // otherwise decrement number
+// };

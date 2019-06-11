@@ -35,8 +35,7 @@ function reverseInteger(number){
   return output;
 }
 
-
-// console.log(reverseInteger(123));
+console.log(reverseInteger(100));
 
 // function reverseInteger(number) {
 //   let result = 0;
