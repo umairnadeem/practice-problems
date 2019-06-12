@@ -88,7 +88,7 @@ Number.prototype.toEnglish = function () {
       i++;
     }
 
-    output = `${Math.floor(n).toEnglish()} ${numbersToPlace[thousand ** i]} ${(this % (thousand ** i)).toEnglish()}`;
+    output = `${Math.floor(n).toEnglish()} ${numbersToPlace[thousand ** i]} ${this % (thousand ** i) ? (this % (thousand ** i)).toEnglish() : ''}`;
   }
 
   // Decimal support
@@ -100,10 +100,10 @@ Number.prototype.toEnglish = function () {
   //   return n;
   // }
 
-  return output;
+  return output.trim();
 };
 
-console.log((2345).toEnglish());
+// console.log((10000000000).toEnglish());
 
 // 0 - 20 -> direct translations
 // 21 - 99 ->  direct translation of 1st place + direct translation of 2nd place
