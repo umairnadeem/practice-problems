@@ -54,5 +54,41 @@ var numbersToPlace = {
 };
 
 Number.prototype.toEnglish = function () {
-  // return my value as english words
+
+  // 0 - 20
+  if (numbersToWords[this]) {
+    return numbersToWords[this];
+  }
+
+  //21 - 99
+  if (this < 100) {
+    return `${numbersToWords[this - (this % 10)]} ${(this % 10).toEnglish()}`;
+  }
+
+  // 100 - 999
+  if (this >= 100) {
+    let output = ``;
+    let n = this;
+
+    let place = 100;
+    while (Math.floor(this / place) >= 10) {
+      place *= 10;
+    }
+
+    while (n) {
+      output += `${Math.floor(n / place).toEnglish()} `;
+      n -= Math.floor(n / place);
+    } 
+  } 
 };
+
+// 999
+// 1000
+
+console.log((150043).toEnglish());
+
+// 0 - 20 -> direct translations
+// 21 - 99 ->  direct translation of 1st place + direct translation of 2nd place
+  // direct translation(n - (n % 10)) + direct translation (n % 10)
+// 100 - 999 ->  direct translation (Math.floor(n / 100)) + hundred + recursive(n % 100)
+// 1000 - 9999 -> direct translation (Math.floor(n / 1000)) + thousand + recursive(n % 1000)
