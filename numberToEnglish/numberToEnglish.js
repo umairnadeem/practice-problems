@@ -55,6 +55,8 @@ var numbersToPlace = {
 
 Number.prototype.toEnglish = function () {
 
+  let output = ``;
+
   // 0 - 20
   if (numbersToWords[this]) {
     return numbersToWords[this];
@@ -62,11 +64,11 @@ Number.prototype.toEnglish = function () {
 
   //21 - 99
   if (this < 100) {
-    return `${numbersToWords[this - (this % 10)]} ${(this % 10).toEnglish()}`;
+    output = `${numbersToWords[this - (this % 10)]} ${(this % 10).toEnglish()}`;
   }
 
   // 100 - 9999
-  if (this < 10000) {
+  if (this < 10000 && this >= 100) {
     let placement;
     for (let place in numbersToPlace) {
       if (Math.floor(this / place) < 10) {
@@ -74,8 +76,8 @@ Number.prototype.toEnglish = function () {
         break;
       }
     }
-    return `${Math.floor(this / placement).toEnglish()} ${numbersToPlace[placement]} ${(this % placement).toEnglish()}`;
-  } else {
+    output = `${Math.floor(this / placement).toEnglish()} ${numbersToPlace[placement]} ${(this % placement).toEnglish()}`;
+  } else if (this >= 10000) {
     let n = this;
     let i = 0;
     const thousand = 1e3;
@@ -85,12 +87,22 @@ Number.prototype.toEnglish = function () {
       i++;
     }
 
-    return `${Math.floor(n).toEnglish()} ${numbersToPlace[thousand ** i]} ${(this % (thousand ** i)).toEnglish()}`;
+    output = `${Math.floor(n).toEnglish()} ${numbersToPlace[thousand ** i]} ${(this % (thousand ** i)).toEnglish()}`;
   }
 
+  // Decimal support
+  // if (this % 1) {
+  //   let n = Math.round(this % 1);
+  //   while (n % 1) {
+  //     n *= 10;
+  //   }
+  //   return n;
+  // }
+
+  return output;
 };
 
-// console.log((9148237412).toEnglish());
+console.log((23423).toEnglish());
 
 // 0 - 20 -> direct translations
 // 21 - 99 ->  direct translation of 1st place + direct translation of 2nd place
