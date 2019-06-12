@@ -64,7 +64,7 @@ Number.prototype.toEnglish = function () {
 
   //21 - 99
   if (this < 100) {
-    output = `${numbersToWords[this - (this % 10)]} ${(this % 10).toEnglish()}`;
+    output = `${numbersToWords[this - (this % 10)]}-${(this % 10).toEnglish()}`;
   }
 
   // 100 - 9999
@@ -76,7 +76,8 @@ Number.prototype.toEnglish = function () {
         break;
       }
     }
-    output = `${Math.floor(this / placement).toEnglish()} ${numbersToPlace[placement]} ${(this % placement).toEnglish()}`;
+    // return this % placement
+    output = `${Math.floor(this / placement).toEnglish()} ${numbersToPlace[placement]} ${this % placement ? (this % placement).toEnglish() : ''}`;
   } else if (this >= 10000) {
     let n = this;
     let i = 0;
@@ -102,7 +103,7 @@ Number.prototype.toEnglish = function () {
   return output;
 };
 
-console.log((23423).toEnglish());
+console.log((2345).toEnglish());
 
 // 0 - 20 -> direct translations
 // 21 - 99 ->  direct translation of 1st place + direct translation of 2nd place
