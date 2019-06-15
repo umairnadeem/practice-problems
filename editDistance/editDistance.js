@@ -52,7 +52,8 @@ function editDistance(str1, str2) {
   return operations;
 }
 
-// console.log(editDistance('hey', 'ahey'));
+console.log(editDistance("wednesday", "sunday"));
+  // 
 
 // elle, elloh -> 2
 // bbacy, bbad -> 2
