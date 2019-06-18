@@ -68,5 +68,5 @@ debugger;
     }
 };
 
-console.log(rotatedArraySearch([10,0,1,2,3,4,5], 5))
+console.log(rotatedArraySearch([6,7,0,1,2,3,4], 0))
 

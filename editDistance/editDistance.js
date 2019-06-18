@@ -7,52 +7,20 @@ String.prototype.splice = function(start, delCount, newSubStr) {
 };
 
 function editDistance(str1, str2) {
-  // go through characters of str2 (pivot)
-    // check str1 in the same position
-      // if characters different
-        // if str1 shorter than str2
-          // add character to str1
-          // operations++
-        // if str1 longer than or equal to str2
-          // if character not included anywhere forward in str2
-            // replace character
-            // operations ++
-          // otherwise insert character
-            // operations++
-    
-    // if length of str1 greater than str2, remove characters from end
-      // operations ++ by amount of removals
-    
-    // return operations
-  let operations = 0;
-
-  for (let char in str2) {
-    debugger;
-    char = +char;
-    if (str1[char] !== str2[char]) {
-      if (str1.length < str2.length) {
-        str1 = str1.splice(char, 0, str2[char]);
-        operations++;
-      } else {
-        if (str2.slice(char).indexOf(str1[char]) === -1) {
-          str1 = str1.splice(char, 1, str2[char]);
-          operations++;
-        } else {
-          str1 = str1.splice(char, 0, str2[char]);
-          operations++;
-        }
-      }
+  debugger;
+  function recursiveDistance(first, second, x, y) {
+    if (x <= 0) return y;
+    if (y <= 0) return x;
+    if (first[x - 1] === second[y - 1]) {
+      return recursiveDistance(first, second, x - 1, y - 1);
     }
+    return (1 + Math.min(recursiveDistance(first, second, x, y - 1), recursiveDistance(first, second, x - 1, y), recursiveDistance(first, second, x - 1, y - 1)));
   }
 
-  if (str1.length > str2.length) {
-    operations += str1.length - str2.length;
-  }
-
-  return operations;
+  return recursiveDistance(str1, str2, str1.length, str2.length);
 }
 
-console.log(editDistance("wednesday", "sunday"));
+console.log(editDistance("ac", "bd"));
   // 
 
 // elle, elloh -> 2
