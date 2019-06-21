@@ -11,23 +11,65 @@
 
 // A Board class will be useful
 
-var makeBoard = function(n) {
-  var board = [];
-  for (var i = 0; i < n; i++) {
-    board.push([]);
-    for (var j = 0; j < n; j++) {
-      board[i].push(false);
+class Board {
+  constructor(n) {
+    this.rows = [];
+    for (var i = 0; i < n; i++) {
+      this.rows.push([]);
+      for (var j = 0; j < n; j++) {
+        this.rows[i].push(false);
+      }
     }
   }
-  board.togglePiece = function(i, j) {
-    this[i][j] = !this[i][j];
+
+  togglePiece(i, j) {
+    this.rows[i][j] = !this.rows[i][j];
   };
-  board.hasBeenVisited = function(i, j) {
-    return !!this[i][j];
+
+  hasBeenVisited(i, j) {
+    return !!this.rows[i][j];
   };
-  return board;
+}
+
+let paths = 0;
+
+var robotPaths = function(n, board = new Board(n), i = 0, j = 0) {
+  // mark current point as visited
+  // if current point is the last point, increment paths
+  // for each up, down, left, right unvisited and valid path
+    // call function recursively
+  let newBoard = new Board(n);
+
+  board.rows[i][j] = true;
+  newBoard.rows = board.rows;
+
+  if (i === n - 1 && j === n - 1) {
+    paths++;
+    return;
+  }
+
+  // Check above
+  if (board.rows[i - 1] !== undefined && board.rows[i - 1][j] !== true) {
+    robotPaths(n, newBoard, i - 1, j);
+  }
+
+  // check below
+  if (board.rows[i + 1] !== undefined && board.rows[i + 1][j] !== true) {
+    robotPaths(n, newBoard, i + 1, j);
+  }
+
+  // check left
+  if (board.rows[i][j - 1] !== undefined && board.rows[i][j - 1] !== true) {
+    robotPaths(n, newBoard, i, j - 1);
+  }
+
+  // check right
+  if (board.rows[i][j + 1] !== undefined && board.rows[i][j + 1] !== true) {
+    robotPaths(n, newBoard, i, j + 1);
+  }
+
+  return paths;
 };
 
-var robotPaths = function(n, board, i, j) {
-};
 
+console.log(robotPaths(2));
