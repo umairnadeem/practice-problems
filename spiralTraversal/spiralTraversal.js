@@ -83,7 +83,10 @@ var spiralTraversal = function (matrix) {
         //delete column
         row.pop();
       });
-      matrix.forEach((row, i) => row === [] ? matrix.splice(i,1) : 0);
+      const length1 = matrix ? matrix.length : 0;
+      for (let i = 0; i < length1; i++) {
+        matrix[i].length ? 0 : matrix.splice(i,1);
+      }
     }
   
     // push left
@@ -104,14 +107,14 @@ var spiralTraversal = function (matrix) {
         output.push(arr[index][0]);
         arr[index].shift();
       });
-      matrix.forEach((row, i) => row === [] ? matrix.splice(i,1) : 0);
+      const length2 = matrix ? matrix.length : 0;
+      for (let i = 0; i < length2; i++) {
+        matrix[i].length ? 0 : matrix.splice(i,1);
+      }
     }
   }
 
   return output;
 };
 
-// console.log(spiralTraversal([[1,2,3,4],
-//   [5,6,7,8],
-//   [9,10,11,12],
-//   [13,14,15,16]]))
+console.log(spiralTraversal([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15], [16, 17, 18], [19, 20, 21], [22, 23, 24]]))
