@@ -29,6 +29,10 @@ class Board {
   hasBeenVisited(i, j) {
     return !!this.rows[i][j];
   };
+
+  clone() {
+    return this.rows.map(row => row.slice());
+  }
 }
 
 let paths = 0;
@@ -41,30 +45,35 @@ var robotPaths = function(n, board = new Board(n), i = 0, j = 0) {
   let newBoard = new Board(n);
 
   board.rows[i][j] = true;
-  newBoard.rows = board.rows;
+  newBoard.rows = board.clone();
 
   if (i === n - 1 && j === n - 1) {
     paths++;
     return;
   }
 
+  debugger;
   // Check above
   if (board.rows[i - 1] !== undefined && board.rows[i - 1][j] !== true) {
+    newBoard.rows = board.clone();
     robotPaths(n, newBoard, i - 1, j);
   }
 
   // check below
   if (board.rows[i + 1] !== undefined && board.rows[i + 1][j] !== true) {
+    newBoard.rows = board.clone();
     robotPaths(n, newBoard, i + 1, j);
   }
 
   // check left
   if (board.rows[i][j - 1] !== undefined && board.rows[i][j - 1] !== true) {
+    newBoard.rows = board.clone();
     robotPaths(n, newBoard, i, j - 1);
   }
 
   // check right
   if (board.rows[i][j + 1] !== undefined && board.rows[i][j + 1] !== true) {
+    newBoard.rows = board.clone();
     robotPaths(n, newBoard, i, j + 1);
   }
 
@@ -72,4 +81,4 @@ var robotPaths = function(n, board = new Board(n), i = 0, j = 0) {
 };
 
 
-console.log(robotPaths(2));
+// console.log(robotPaths(3));
