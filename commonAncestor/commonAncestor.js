@@ -38,9 +38,29 @@ Tree.prototype.addChild = function(child) {
   *  3.) between my grandma and my grandma -> my grandma
   *  4.) between me and a potato -> null
   */
-Tree.prototype.getClosestCommonAncestor = function(/*...*/
-) {
-  // TODO: implement me!
+Tree.prototype.getClosestCommonAncestor = function(node1, node2) {
+  // Find the deepest node where both descendants are descendants of that node
+
+  // set common ancestor to null
+  let commonAncestor = null;
+
+  // for each child of this
+    // if both node1 and node2 are descendents
+      // set common ancestor as this
+    // call function recursively
+  const nodeTraverser = parent => {
+    if (parent.isDescendant(node1) && parent.isDescendant(node2)) {
+      commonAncestor = parent;
+    }
+    parent.children.forEach(child => {
+      nodeTraverser(child);
+    });
+  };
+
+  nodeTraverser(this);
+
+
+  return commonAncestor;
 };
 
 /**
@@ -51,9 +71,19 @@ Tree.prototype.getClosestCommonAncestor = function(/*...*/
   * 3.) me.getAncestorPath(me) -> [me]
   * 4.) grandma.getAncestorPath(H R Giger) -> null
   */
-Tree.prototype.getAncestorPath = function(/*...*/
-) {
-  // TODO: implement me!
+Tree.prototype.getAncestorPath = function(child) {
+  // if child is descendent of this
+    // push this to array
+  let path = [];
+
+  const nodeTraverser = node => {
+    if (node.isDescendant(child)) {
+      path.push(node);
+    }
+    node.forEach(child => nodeTraverser(child));
+  }
+
+  return path;
 };
 
 /**
