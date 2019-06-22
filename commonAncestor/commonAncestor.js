@@ -39,17 +39,10 @@ Tree.prototype.addChild = function(child) {
   *  4.) between me and a potato -> null
   */
 Tree.prototype.getClosestCommonAncestor = function(node1, node2) {
-  // Find the deepest node where both descendants are descendants of that node
-
-  // set common ancestor to null
   let commonAncestor = null;
 
-  // for each child of this
-    // if both node1 and node2 are descendents
-      // set common ancestor as this
-    // call function recursively
   const nodeTraverser = parent => {
-    if (parent.isDescendant(node1) && parent.isDescendant(node2)) {
+    if (parent.isDescendant(node1) && parent.isDescendant(node2) || node1 === node2) {
       commonAncestor = parent;
     }
     parent.children.forEach(child => {
@@ -58,7 +51,6 @@ Tree.prototype.getClosestCommonAncestor = function(node1, node2) {
   };
 
   nodeTraverser(this);
-
 
   return commonAncestor;
 };
@@ -80,8 +72,10 @@ Tree.prototype.getAncestorPath = function(child) {
     if (node.isDescendant(child)) {
       path.push(node);
     }
-    node.forEach(child => nodeTraverser(child));
+    node.children.forEach(child => nodeTraverser(child));
   }
+
+  nodeTraverser(this);
 
   return path;
 };
@@ -117,3 +111,7 @@ Tree.prototype.removeChild = function(child) {
     throw new Error('That node is not an immediate child of this tree');
   }
 };
+
+var trunk = new Tree();
+var commonAncestor = trunk.getClosestCommonAncestor(trunk, trunk);
+console.log(commonAncestor);
