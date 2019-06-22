@@ -11,74 +11,62 @@
 
 // A Board class will be useful
 
-class Board {
-  constructor(n) {
-    this.rows = [];
-    for (var i = 0; i < n; i++) {
-      this.rows.push([]);
-      for (var j = 0; j < n; j++) {
-        this.rows[i].push(false);
-      }
+var makeBoard = function(n) {
+  var board = [];
+  for (var i = 0; i < n; i++) {
+    board.push([]);
+    for (var j = 0; j < n; j++) {
+      board[i].push(false);
     }
   }
-
-  togglePiece(i, j) {
-    this.rows[i][j] = !this.rows[i][j];
+  board.togglePiece = function(i, j) {
+    this[i][j] = !this[i][j];
   };
-
-  hasBeenVisited(i, j) {
-    return !!this.rows[i][j];
+  board.hasBeenVisited = function(i, j) {
+    return !!this[i][j];
   };
+  return board;
+};
 
-  clone() {
-    return this.rows.map(row => row.slice());
-  }
-}
 
-let paths = 0;
+var robotPaths = function(n, board = makeBoard(n), i = 0, j = 0) {
+  let paths = 0;
 
-var robotPaths = function(n, board = new Board(n), i = 0, j = 0) {
-  // mark current point as visited
-  // if current point is the last point, increment paths
-  // for each up, down, left, right unvisited and valid path
-    // call function recursively
-  let newBoard = new Board(n);
+  function traverse(i, j) {
+    board.togglePiece(i, j);
+  
+    if (i === n - 1 && j === n - 1) {
+      board.togglePiece(i, j);
+      paths++;
+      return;
+    }
+  
+    // Check above
+    if (board[i - 1] !== undefined && !board.hasBeenVisited(i - 1,j)) {
+      traverse(i - 1, j);
+    }
+  
+    // check below
+    if (board[i + 1] !== undefined && !board.hasBeenVisited(i + 1,j)) {
+      traverse(i + 1, j);
+    }
+  
+    // check left
+    if (board[i][j - 1] !== undefined && !board.hasBeenVisited(i,j - 1)) {
+      traverse(i, j - 1);
+    }
+  
+    // check right
+    if (board[i][j + 1] !== undefined && !board.hasBeenVisited(i,j + 1)) {
+      traverse(i, j + 1);
+    }
 
-  board.rows[i][j] = true;
-  newBoard.rows = board.clone();
-
-  if (i === n - 1 && j === n - 1) {
-    paths++;
-    return;
-  }
-
-  debugger;
-  // Check above
-  if (board.rows[i - 1] !== undefined && board.rows[i - 1][j] !== true) {
-    newBoard.rows = board.clone();
-    robotPaths(n, newBoard, i - 1, j);
-  }
-
-  // check below
-  if (board.rows[i + 1] !== undefined && board.rows[i + 1][j] !== true) {
-    newBoard.rows = board.clone();
-    robotPaths(n, newBoard, i + 1, j);
-  }
-
-  // check left
-  if (board.rows[i][j - 1] !== undefined && board.rows[i][j - 1] !== true) {
-    newBoard.rows = board.clone();
-    robotPaths(n, newBoard, i, j - 1);
+    board.togglePiece(i, j);
   }
 
-  // check right
-  if (board.rows[i][j + 1] !== undefined && board.rows[i][j + 1] !== true) {
-    newBoard.rows = board.clone();
-    robotPaths(n, newBoard, i, j + 1);
-  }
+  traverse(i, j);
 
   return paths;
 };
 
-
-// console.log(robotPaths(3));
+console.log(robotPaths(6));
