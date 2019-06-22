@@ -77,6 +77,9 @@ Tree.prototype.getAncestorPath = function(child) {
 
   nodeTraverser(this);
 
+  if (path[0]) path.push(child);
+  else return null;
+
   return path;
 };
 
@@ -112,6 +115,9 @@ Tree.prototype.removeChild = function(child) {
   }
 };
 
-var trunk = new Tree();
-var commonAncestor = trunk.getClosestCommonAncestor(trunk, trunk);
-console.log(commonAncestor);
+// var parent = new Tree();
+// var myChild = new Tree();
+// var anotherChild = new Tree();
+// parent.addChild(myChild);
+// var path = parent.getAncestorPath(anotherChild);
+// console.log(path)
