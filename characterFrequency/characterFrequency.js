@@ -37,5 +37,19 @@
 
 
 var characterFrequency = function(string) {
+  let obj = {};
+  let result;
+
+  for (let char of string) {
+    obj[char] = obj[char] ? obj[char] + 1 : 1;
+  }
+
+  result = Object.keys(obj)
+            .sort((a,b) => a < b ? -1 : a === b ? 0 : 1)
+            .map(key => [key, obj[key]])
+            .sort((a,b) => b[1] - a[1]);
+
   return result;
 };
+
+// console.log(characterFrequency('hey man how are ya'));
