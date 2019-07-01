@@ -22,5 +22,12 @@
 */
 
 Array.prototype.isSubsetOf = function (arr) {
-  // your code here
+  let filtered = this.filter((elem, i, a) => a.indexOf(elem) === i);
+  let output = true;
+  filtered.forEach(val => {
+    if (arr.indexOf(val) === -1) {
+      output = false;
+    }
+  });
+  return output;
 };
