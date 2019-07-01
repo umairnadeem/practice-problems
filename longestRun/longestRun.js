@@ -14,7 +14,35 @@
  */
 
 var longestRun = function (string) {
-  // TODO: Your code here!
+  let output = [0, 0];
+  let longest = 0;
+  let count = 0;
+  let start = 0;
+  let end = 0;
+  let newIteration = true;
+
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === string[i + 1]) {
+      if (newIteration) {
+        start = i;
+        end = i + 1;
+        newIteration = false;
+      }
+      count++;
+      if (count > longest) {
+        end = i + 1;
+        longest = count;
+        output = [start, end];
+      }
+    } else {
+      newIteration = true;
+      count = 0;
+      start = i;
+      end = i;
+    }
+  }
+
+  return string.length ? output : null;
 };
 
 // If you need a random string generator, use this!
@@ -29,3 +57,7 @@ var randomString = function (len) {
 
   return text;
 };
+
+// let str = randomString(100);
+// console.log(str);
+// console.log(longestRun(str)); // [1, 3]
