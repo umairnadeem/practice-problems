@@ -44,7 +44,7 @@ var characterFrequency = function(string) {
     obj[char] = obj[char] + 1 || 1;
   }
 
-  result = Object.entries(obj)
+  result = Object.keys(obj)
             .sort((a,b) => a < b ? -1 : a === b ? 0 : 1)
             .map(key => [key, obj[key]])
             .sort((a,b) => b[1] - a[1]);
@@ -52,4 +52,4 @@ var characterFrequency = function(string) {
   return result;
 };
 
-console.log(characterFrequency('supercalifragilisticexpialidocious').length);
+console.log(characterFrequency('supercalifragilisticexpialidocious'));
