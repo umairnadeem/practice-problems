@@ -29,6 +29,22 @@ Output: false
 Explanation: The root node's value is 5 but its right child's value is 4.
 
 */
+/* Solution 2*/
+var isValidBST = function(root) {
+  let output = true;
+  let prev = -Infinity;
+  const preorder = (node) => {
+      if (!node) return true;
+      if (node.left) preorder(node.left, node.val);
+      if (node.val <= prev) output = false;
+      prev = node.val;
+      if (node.right) preorder(node.right, node.val);
+  };
+  preorder(root);
+  return output;
+};
+
+/* Solution 1 */
 var isValidBST = function(root) {
   var inner = (node, upper = null, lower = null) => {
       if (node === null || node === undefined) return true;
